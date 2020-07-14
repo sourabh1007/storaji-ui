@@ -5,6 +5,28 @@
     <div class="uk-container uk-container-large">
       <storaji-products-add (update)="onUpdate($event)"></storaji-products-add>
       <div class="uk-card uk-card-default uk-card-body" products-table>
+        <div class="uk-child-width-1-4@s uk-grid-collapse uk-text-center product-header" uk-grid>
+          <div>
+            <div class="uk-tile uk-padding-remove uk-tile-secondary">
+              <p class="uk-h4"> Total Cost Price </p>
+            </div>
+          </div>
+          <div>
+            <div class="uk-tile uk-padding-remove uk-tile-muted">
+              <p class="uk-h4"> {{totalCostPrice}}</p>
+            </div>
+          </div>
+          <div>
+            <div class="uk-tile uk-padding-remove uk-tile-secondary">
+              <p class="uk-h4">Total Selling Price</p>
+            </div>
+          </div>
+          <div>
+            <div class="uk-tile uk-padding-remove uk-tile-muted">
+              <p class="uk-h4"> {{totalSellingPrice}}</p>
+            </div>
+          </div>
+        </div>
         <table class="uk-table uk-table-justify uk-table-divider">
           <thead>
             <tr>
@@ -15,6 +37,8 @@
               <th>{{ 'table.sku' | translate }}</th>
               <th>{{ 'table.type' | translate }}</th>
               <th>{{ 'table.stock' | translate }}</th>
+              <th>{{ 'table.cost' | translate }}</th>
+              <th>{{ 'table.sellcost' | translate }}</th>
               <th>{{ 'table.status' | translate }}</th>
             </tr>
           </thead>
@@ -32,6 +56,8 @@
               <td>{{product.sku}}</td>
               <td>{{(product.type) ? product.type.name : product.type}}</td>
               <td>{{product.stock}}</td>
+              <td>{{product.cost * product.stock}}</td>
+              <td>{{product.selling_price * product.stock}}</td>
               <div *ngIf="(product.stock > 0); then ok else not"></div>
               <ng-template #ok>
                 <td>

@@ -31,6 +31,25 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadData();
     if (typeof numeral !== 'undefined') {
+
+      if (!numeral["locales"]["en-in"]) {
+        numeral.register("locale", "en-in", {
+           delimiters: {
+              thousands: " ",
+              decimal: ","
+           },
+           abbreviations: {
+              thousand: "K",
+              million: "M",
+              billion: "B",
+              trillion: "T"
+           },
+           currency: {
+              symbol: "₹" //The currency for UAE is called the Dirham
+           }
+        });
+      }
+
       this.currencies = Object.keys(numeral.locales).map(id => {
         return {
           id: id,

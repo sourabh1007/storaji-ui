@@ -19,6 +19,8 @@
     "status": "Status",
     "stock": "Stock",
     "sku": "SKU",
+    "cost": "Cost Price(₹)",
+    "sellcost": "Selling Price(₹)",
     "type": "Type",
     "no-data": "No Data",
     "customer": {
@@ -29,7 +31,11 @@
       "name": "Company Name"
     },
     "order": {
-      "id": "Order ID"
+      "id": "Order ID",
+      "amount": "Amount",
+      "selling_price": "Selling Price",
+      "actual_price": "Actual Price",
+      "discount": "Discount"
     },
     "product": {
       "name": "Product Name"
@@ -62,8 +68,12 @@
       "description": "Description",
       "sold": "Sold",
       "amount": "Amount",
+      "actualamount": "Actual Cost",
+      "discount": "Discount",
+      "quantity": "Quantity",
       "date_from": "Date From",
-      "date_to": "Date To"
+      "date_to": "Date To",
+      "sales_date": "Sales Date"
     },
     "placeholder": {
       "email": "Enter Email",
@@ -89,7 +99,11 @@
       "selling-price": "Enter Selling Price",
       "description": "Enter Description",
       "amount": "Enter Amount",
-      "date": "Enter Date"
+      "date": "Enter Date",
+      "actualamount": "Auto Populate",
+      "discount": "Auto Populate",
+      "quantity": "Enter Quantity",
+      "sales_date": "Sales Date"
     },
     "button": {
       "save": "Save",

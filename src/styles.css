@@ -225,3 +225,8 @@ storaji-autocomplete .ui-autocomplete-list-item.ui-state-highlight {
         margin-left: 300px;
     }
 }
+
+.product-header {
+    width:80%;
+    float:right;
+}
