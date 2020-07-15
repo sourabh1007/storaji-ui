@@ -54,7 +54,8 @@ export class OrdersService {
   add(order: Order[]): Observable<Order[]> {
     this.beforeRequest();
     const body = JSON.stringify(order);
-
+    console.log('body');
+    console.log(body);
     return this._http.post(`${this._ordersUrl}/add`, body, this._utils.makeOptions(this._headers))
       .map((res: Response) => res.json().data)
       .do(

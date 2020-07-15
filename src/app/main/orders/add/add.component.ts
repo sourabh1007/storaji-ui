@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterViewChecked, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
-import { isArray, forEach } from 'lodash';
+import { isArray, forEach, map } from 'lodash';
 import { ProductsService } from '../../../core/services/products.service';
 import { CustomersService } from '../../../core/services/customers.service';
 import { OrdersService } from '../../../core/services/orders.service';
@@ -12,12 +12,13 @@ import { OrderDetail } from '../../../core/classes/order-detail';
 import { StatsService } from '../../../core/services/stats.service';
 import { UtilsService } from '../../../shared/services/utils.service';
 
+declare var jQuery: any;
 @Component({
   selector: 'storaji-orders-add',
   templateUrl: './add.component.html',
   styles: []
 })
-export class AddComponent implements OnInit, OnDestroy {
+export class AddComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
   private _sub: Subscription = undefined;
   private _addSub: Subscription = undefined;
   private _customerSub: Subscription = undefined;
@@ -42,6 +43,14 @@ export class AddComponent implements OnInit, OnDestroy {
     this.init();
   }
 
+  ngAfterViewInit() {
+    jQuery('input[uk-datepicker]').datepicker({ format: 'yyyy-mm-dd', autoPick:true });
+  }
+
+  ngAfterViewChecked() {
+    jQuery('input[uk-datepicker]').datepicker({ format: 'yyyy-mm-dd', autoPick:true });
+  }
+
   ngOnDestroy() {
     this._utils.unsubscribeSub(this._sub);
     this._utils.unsubscribeSub(this._customerSub);
@@ -50,6 +59,12 @@ export class AddComponent implements OnInit, OnDestroy {
 
   async onSubmit() {
     this._utils.unsubscribeSub(this._addSub);
+    map(jQuery('input[uk-datepicker]'), el => {
+      const input = jQuery(el)[0];
+      this.orders[input.name.slice().replace('sales_date-', '')].order_detail.sales_date = input.value;
+      return el;
+    });
+
     this._addSub = await this._ordersService.add(this.orders).subscribe(
       data => {
         if (isArray(data)) {
@@ -89,6 +104,20 @@ export class AddComponent implements OnInit, OnDestroy {
   available_stock(e: any, i: number) {
     if (e.target.value > this.orders[i].order_detail.product.stock) {
       return e.target.value = this.orders[i].order_detail.product.stock;
+    }
+  }
+
+  update_actual_price(e: any, i: number) {
+    if (e.target.value) {
+      this.orders[i].order_detail.actual_price = (e.target.value * this.orders[i].order_detail.product.selling_price);
+    }
+  }
+
+  update_discount(e: any, i: number) {
+    if (e.target.value && this.orders[i].order_detail.actual_price) {
+      var tempPercentCalculate = (e.target.value/this.orders[i].order_detail.actual_price)*100;
+      var percentage = 100 - tempPercentCalculate;
+      this.orders[i].order_detail.discount = (percentage);
     }
   }
 
