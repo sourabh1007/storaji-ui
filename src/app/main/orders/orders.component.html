@@ -7,25 +7,31 @@
       <div class="uk-card uk-card-default uk-card-body" customers-table>
         <table class="uk-table uk-table-justify uk-table-divider">
           <thead>
-            <tr>
-              <th class="uk-width-auto">{{ 'table.order.id' | translate }}</th>
-              <th class="uk-width-medium">{{ 'table.customer.name' | translate }}</th>
-              <th>{{ 'table.date' | translate }}</th>
-            </tr>
+          <tr>
+            <th class="uk-width-auto">{{ 'table.order.id' | translate }}</th>
+            <th class="uk-width-auto">{{ 'table.product.name' | translate }}</th>
+            <th class="uk-width-auto">{{ 'table.order.amount' | translate }}</th>
+            <th class="uk-width-auto">{{ 'table.order.selling_price' | translate }}</th>
+            <th class="uk-width-auto">{{ 'table.order.actual_price' | translate }}</th>
+            <th class="uk-width-auto">{{ 'table.order.discount' | translate }}</th>
+            <th>{{ 'table.order.sales_date' | translate }}</th>
+          </tr>
           </thead>
           <tbody>
-            <tr *ngIf="orders && !orders.length">
-              <th colspan="3" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
-            </tr>
-            <tr *ngFor="let order of orders; let i=index;">
-              <td class="uk-table-link">
-                <a [routerLink]="['../orders', order.id]" class="uk-link-reset uk-text-uppercase">#{{order.id.split('-')[0]}}</a>
-              </td>
-              <td class="uk-table-link">
-                <a [routerLink]="['../customers', order.customer.id]" class="uk-link-reset">{{order.customer.full_name}}</a>
-              </td>
-              <td>{{order.created_at}}</td>
-            </tr>
+          <tr *ngIf="orders && !orders.length">
+            <th colspan="3" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
+          </tr>
+          <tr *ngFor="let order of orders; let i=index;">
+            <td class="uk-table-link">
+              <a [routerLink]="['../orders', order.id]" class="uk-link-reset uk-text-uppercase">#{{order.id.split('-')[0]}}</a>
+            </td>
+            <td>{{order.order_detail.product.name}}</td>
+            <td>{{order.order_detail.amount}}</td>
+            <td>{{order.order_detail.selling_price}}</td>
+            <td>{{order.order_detail.actual_price}}</td>
+            <td>{{order.order_detail.discount}}</td>
+            <td>{{order.order_detail.sales_date}}</td>
+          </tr>
           </tbody>
         </table>
       </div>

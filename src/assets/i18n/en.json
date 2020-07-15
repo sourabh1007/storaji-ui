@@ -32,10 +32,11 @@
     },
     "order": {
       "id": "Order ID",
-      "amount": "Amount",
+      "amount": "Quantity",
       "selling_price": "Selling Price",
       "actual_price": "Actual Price",
-      "discount": "Discount"
+      "discount": "Discount",
+      "sales_date": "Sales Date"
     },
     "product": {
       "name": "Product Name"
