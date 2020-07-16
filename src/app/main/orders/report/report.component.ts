@@ -44,8 +44,8 @@ export class ReportComponent implements OnInit, OnDestroy {
       data => {
         isArray(data) ? this.orders = data : data
         this.orders.map(function(order) {
-          totalCP += (order.order_detail.product.cost * order.order_detail.amount);
-          totalSP += (order.order_detail.selling_price * order.order_detail.amount);
+          totalCP += (order.order_detail.actual_price);
+          totalSP += (order.order_detail.selling_price);
         });
         this.totalCostPrice = numeral(totalCP).format(this._utils.format);
         this.totalSellingPrice = numeral(totalSP).format(this._utils.format);
@@ -59,8 +59,8 @@ export class ReportComponent implements OnInit, OnDestroy {
     var totalCP:number=0;
     var totalSP:number=0;
     this.orders.map(function(order) {
-      totalCP += (order.order_detail.product.cost * order.order_detail.amount);
-      totalSP += (order.order_detail.selling_price * order.order_detail.amount);
+      totalCP += (order.order_detail.actual_price);
+      totalSP += (order.order_detail.selling_price);
     });
     this.totalCostPrice = numeral(totalCP).format(this._utils.format);
     this.totalSellingPrice = numeral(totalSP).format(this._utils.format);
@@ -98,10 +98,6 @@ export class ReportComponent implements OnInit, OnDestroy {
               },
               {
                 text: this.translate.instant('form.label.selling_price').toUpperCase(),
-                style: 'tableHeader'
-              },
-              {
-                text: this.translate.instant('form.label.total').toUpperCase(),
                 style: 'tableHeader'
               },
               {
@@ -144,8 +140,6 @@ export class ReportComponent implements OnInit, OnDestroy {
         item.customer.full_name,
         item.order_detail.amount,
         this.currency.set(item.order_detail.selling_price)
-          .format(this._utils.format),
-        this.currency.set(item.order_detail.amount * item.order_detail.product.selling_price)
           .format(this._utils.format),
         item.order_detail.sales_date
       ]);
