@@ -19,6 +19,8 @@ export class ReportComponent implements OnInit, OnDestroy {
   private _sub: Subscription = undefined;
   orders: Order[];
   currency = numeral();
+  totalCostPrice: number;
+  totalSellingPrice: number;
 
   constructor(
     private _ordersService: OrdersService,
@@ -36,13 +38,32 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   loadOrders() {
     this._utils.unsubscribeSub(this._sub);
+    var totalCP:number=0;
+    var totalSP:number=0;
     this._sub = this._ordersService.get().subscribe(
-      data => isArray(data) ? this.orders = data : data
+      data => {
+        isArray(data) ? this.orders = data : data
+        this.orders.map(function(order) {
+          totalCP += (order.order_detail.product.cost * order.order_detail.amount);
+          totalSP += (order.order_detail.selling_price * order.order_detail.amount);
+        });
+        this.totalCostPrice = numeral(totalCP).format(this._utils.format);
+        this.totalSellingPrice = numeral(totalSP).format(this._utils.format);
+      }
     );
   }
 
   onUpdate(orders: Order[]) {
     this.orders = isArray(orders) ? orders : this.orders;
+
+    var totalCP:number=0;
+    var totalSP:number=0;
+    this.orders.map(function(order) {
+      totalCP += (order.order_detail.product.cost * order.order_detail.amount);
+      totalSP += (order.order_detail.selling_price * order.order_detail.amount);
+    });
+    this.totalCostPrice = numeral(totalCP).format(this._utils.format);
+    this.totalSellingPrice = numeral(totalSP).format(this._utils.format);
   }
 
   format(): string {
@@ -76,7 +97,7 @@ export class ReportComponent implements OnInit, OnDestroy {
                 style: 'tableHeader'
               },
               {
-                text: this.translate.instant('form.label.price').toUpperCase(),
+                text: this.translate.instant('form.label.selling_price').toUpperCase(),
                 style: 'tableHeader'
               },
               {
@@ -84,7 +105,7 @@ export class ReportComponent implements OnInit, OnDestroy {
                 style: 'tableHeader'
               },
               {
-                text: this.translate.instant('table.date').toUpperCase(),
+                text: this.translate.instant('table.order.sales_date').toUpperCase(),
                 style: 'tableHeader'
               }
             ]
@@ -122,11 +143,11 @@ export class ReportComponent implements OnInit, OnDestroy {
         item.order_detail.product.name,
         item.customer.full_name,
         item.order_detail.amount,
-        this.currency.set(item.order_detail.product.selling_price)
+        this.currency.set(item.order_detail.selling_price)
           .format(this._utils.format),
         this.currency.set(item.order_detail.amount * item.order_detail.product.selling_price)
           .format(this._utils.format),
-        item.created_at,
+        item.order_detail.sales_date
       ]);
     });
     pdfMake.createPdf(docDefinitions).download('orders.pdf');

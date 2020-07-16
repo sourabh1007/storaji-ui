@@ -8,6 +8,28 @@
         <div class="uk-display-block uk-text-right">
           <button class="uk-button uk-button-primary" type="button" (click)="save()" [disabled]="!orders">{{ 'form.button.save-as-pdf' | translate }}</button>
         </div>
+        <div class="uk-child-width-1-4@s uk-grid-collapse uk-text-center order-report-header" uk-grid>
+          <div>
+            <div class="uk-tile uk-padding-remove uk-tile-secondary">
+              <p class="uk-h4"> Total Cost Price </p>
+            </div>
+          </div>
+          <div>
+            <div class="uk-tile uk-padding-remove uk-tile-muted">
+              <p class="uk-h4"> {{totalCostPrice}}</p>
+            </div>
+          </div>
+          <div>
+            <div class="uk-tile uk-padding-remove uk-tile-secondary">
+              <p class="uk-h4">Total Selling Price</p>
+            </div>
+          </div>
+          <div>
+            <div class="uk-tile uk-padding-remove uk-tile-muted">
+              <p class="uk-h4"> {{totalSellingPrice}}</p>
+            </div>
+          </div>
+        </div>
         <table class="uk-table uk-table-justify uk-table-divider">
           <thead>
             <tr>
@@ -15,7 +37,7 @@
               <th>{{ 'table.product.name' | translate }}</th>
               <th>{{ 'table.customer.name' | translate }}</th>
               <th>{{ 'form.label.amount' | translate }}</th>
-              <th>{{ 'form.label.price' | translate }}</th>
+              <th>{{ 'form.label.sellingPrice' | translate }}</th>
               <th>{{ 'form.label.total' | translate }}</th>
               <th>{{ 'table.order.sales_date' | translate }}</th>
             </tr>
@@ -35,8 +57,8 @@
                 <a [routerLink]="['/dashboard/customers', order.customer.id]" class="uk-link-reset">{{order.customer.full_name}}</a>
               </td>
               <td>{{order.order_detail.amount}}</td>
-              <td>{{currency.set(order.order_detail.product.selling_price).format(format())}}</td>
-              <td>{{currency.set(order.order_detail.product.selling_price * order.order_detail.amount).format(format())}}</td>
+              <td>{{currency.set(order.order_detail.selling_price).format(format())}}</td>
+              <td>{{currency.set(order.order_detail.selling_price * order.order_detail.amount).format(format())}}</td>
               <td>{{order.order_detail.sales_date}}</td>
             </tr>
           </tbody>

@@ -230,3 +230,10 @@ storaji-autocomplete .ui-autocomplete-list-item.ui-state-highlight {
     width:80%;
     float:right;
 }
+
+.order-report-header {
+    width: 70%;
+    float: right;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
