@@ -35,7 +35,7 @@
       "amount": "Quantity",
       "selling_price": "Selling Price",
       "actual_price": "Actual Price",
-      "discount": "Discount",
+      "discount": "Discount(%)",
       "sales_date": "Sales Date"
     },
     "product": {
@@ -71,7 +71,7 @@
       "amount": "Quantity",
       "sellingPrice": "Selling Price",
       "actualamount": "Actual Cost",
-      "discount": "Discount",
+      "discount": "Discount(%)",
       "quantity": "Quantity",
       "date_from": "Date From",
       "date_to": "Date To",
@@ -103,8 +103,8 @@
       "amount": "Enter Quantity",
       "date": "Enter Date",
       "sellingPrice": "Enter Selling Price",
-      "actualamount": "Auto Populate",
-      "discount": "Auto Populate",
+      "actualamount": "Auto Populate(Rs.)",
+      "discount": "Auto Populate (%)",
       "quantity": "Enter Quantity",
       "sales_date": "Sales Date"
     },
