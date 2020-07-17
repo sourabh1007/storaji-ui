@@ -18,6 +18,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[];
   totalCostPrice: number;
   totalSellingPrice: number;
+  lastUpdatedDate: Date;
 
   currency = numeral();
 
@@ -40,21 +41,39 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     var totalCP:number=0;
     var totalSP:number=0;
+    var lastUpdatedDt:Date=null;
     this._sub = this._productService.get().subscribe(
       data => {
         this.products = data;
         this.products.map(function(prdct) {
           totalCP += (prdct.cost * prdct.stock);
           totalSP += (prdct.selling_price * prdct.stock);
+          if(!lastUpdatedDt || prdct.updated_at > lastUpdatedDt) {
+            lastUpdatedDt = prdct.updated_at;
+          }
         });
         this.totalCostPrice = numeral(totalCP).format(this._utils.format);
         this.totalSellingPrice = numeral(totalSP).format(this._utils.format);
+        this.lastUpdatedDate = lastUpdatedDt;
       }
     );
   }
 
   onUpdate(products: Product[]) {
+    var totalCP:number=0;
+    var totalSP:number=0;
+    var lastUpdatedDt:Date=null;
     this.products = isArray(products) ? products : this.products;
-  }
 
+    this.products.map(function(prdct) {
+      totalCP += (prdct.cost * prdct.stock);
+      totalSP += (prdct.selling_price * prdct.stock);
+      if(!lastUpdatedDt || prdct.updated_at > lastUpdatedDt) {
+        lastUpdatedDt = prdct.updated_at;
+      }
+    });
+    this.totalCostPrice = numeral(totalCP).format(this._utils.format);
+    this.totalSellingPrice = numeral(totalSP).format(this._utils.format);
+    this.lastUpdatedDate = lastUpdatedDt;
+  }
 }
