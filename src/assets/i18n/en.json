@@ -9,7 +9,7 @@
       "customer": "Customers",
       "transaction": "Transactions",
       "dashboard": "Dashboard",
-      "order": "Orders"
+      "order": "Sales"
     }
   },
   "table": {
@@ -31,7 +31,7 @@
       "name": "Company Name"
     },
     "order": {
-      "id": "Order ID",
+      "id": "Sales ID",
       "amount": "Quantity",
       "selling_price": "Selling Price",
       "actual_price": "Actual Price",
@@ -79,7 +79,7 @@
     },
     "placeholder": {
       "email": "Enter Email",
-      "order-id": "Enter Order ID",
+      "order-id": "Enter Sales ID",
       "password": "Enter Password",
       "old-password": "Enter Old Password",
       "new-password": "Enter New Password",
@@ -121,12 +121,12 @@
     "new": {
       "product": "New Product",
       "customer": "New Customer",
-      "order": "New Order"
+      "order": "New Sale"
     },
     "edit": {
       "product": "Edit Product",
       "customer": "Edit Customer",
-      "order": "Edit Order",
+      "order": "Edit Sale",
       "profile": "Edit Profile",
       "currency": "Change Currency"
     },

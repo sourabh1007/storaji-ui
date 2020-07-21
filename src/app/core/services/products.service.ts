@@ -80,6 +80,7 @@ export class ProductsService {
     this.beforeRequest();
     const body = JSON.stringify(product);
 
+    console.log(body);
     return this._http.put(`${this._productsUrl}/${id}/update`, body, this._utils.makeOptions(this._headers))
       .map((res: Response) => res.json().data)
       .do(

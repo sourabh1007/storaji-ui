@@ -20,6 +20,7 @@ export class EditComponent implements OnInit, OnDestroy {
   private _updateSub: Subscription = undefined;
   private _deleteSub: Subscription = undefined;
   private _typeSub: Subscription = undefined;
+  private stockNumber: number = 0;
 
   @Input('product')
   product: Product = new Product();
@@ -35,7 +36,9 @@ export class EditComponent implements OnInit, OnDestroy {
     private _utils: UtilsService,
     private _location: Location,
     public translate: TranslateService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
     this.initProduct();
@@ -51,11 +54,12 @@ export class EditComponent implements OnInit, OnDestroy {
     this._utils.unsubscribeSub(this._updateSub);
     this.product.cost = numeral(this.product.cost).value();
     this.product.selling_price = numeral(this.product.selling_price).value();
+    this.product.stock = this.stockNumber;
     this._updateSub = this._productsService.update(this.product.id, this.product)
       .subscribe(data => {
         if (isObject(data)) {
           this.product = data;
-
+          console.log(this.product);
           this.product.cost = numeral(this.product.cost).format(this._utils.format);
           this.product.selling_price = numeral(this.product.selling_price).format(this._utils.format);
           this.update.emit(this.product);
@@ -65,6 +69,10 @@ export class EditComponent implements OnInit, OnDestroy {
 
   onKeyup(e: any) {
     e.target.value = numeral(e.target.value).format(this._utils.format);
+  }
+
+  updateStockNumber(e: any) {
+    this.stockNumber = parseInt(e.target.value);
   }
 
   onDelete() {

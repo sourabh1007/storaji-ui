@@ -28,7 +28,7 @@
       <div class="uk-padding-small">
         <label for="stock" class="uk-form-label">{{ 'form.label.stock' | translate }}</label>
         <input type="number" name="stock" class="uk-input" placeholder="{{ 'form.placeholder.stock' | translate }}" [required]="true"
-          [(ngModel)]="product.stock" #stock="ngModel">
+          [ngModel]= "product.stock" (change)="updateStockNumber($event)" (blur)="updateStockNumber($event)" #stockNumber="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="cost" class="uk-form-label">{{ 'form.label.cost' | translate }}</label>
