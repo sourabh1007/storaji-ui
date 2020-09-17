@@ -28,7 +28,7 @@
       <div class="uk-padding-small">
         <label for="cost" class="uk-form-label">{{ 'form.label.cost' | translate }}</label>
         <input type="text" name="cost" class="uk-input" placeholder="{{ 'form.placeholder.cost' | translate }}" [required]="true"
-          [(ngModel)]="product.cost" #cost="ngModel" (keyup)="onKeyup($event)">
+          [(ngModel)]="product.cost" #cost="ngModel" (change)="onKeyup($event)">
       </div>
       <div class="uk-padding-small">
         <label for="selling_price" class="uk-form-label">{{ 'form.label.selling-price' | translate }}</label>
