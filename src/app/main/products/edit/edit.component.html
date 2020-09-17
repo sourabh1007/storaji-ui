@@ -42,11 +42,6 @@
           (blur)="onKeyup($event)">
       </div>
       <div class="uk-width-1-1 uk-padding-small">
-        <label for="Description" class="uk-form-label">{{ 'form.label.description' | translate }}</label>
-        <textarea name="description" class="uk-textarea" rows="5" placeholder="{{ 'form.placeholder.description' | translate }}"
-          [(ngModel)]="product.description" #description="ngModel"></textarea>
-      </div>
-      <div class="uk-width-1-1 uk-padding-small">
         <button type="submit" class="uk-button uk-button-primary" [disabled]="!productForm.form.valid">{{ 'form.button.save' | translate }}</button>
         <button type="button" class="uk-button uk-button-default" (click)="initProduct()" uk-toggle="target: #form-product-edit; animation: uk-animation-fade">
           {{ 'form.button.cancel' | translate }}

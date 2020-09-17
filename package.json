@@ -1,27 +1,20 @@
 {
-  "name": "storaji",
+  "name": "Invento",
   "version": "1.0.0-beta.9",
   "license": "MIT",
   "description": "The Light/Responsive Inventory Management System.",
   "main": "app/main.js",
   "author": {
-    "name": "Indomaxim Technology",
-    "email": "support@indomaxim.web.id",
-    "url": "https://indomaxim.web.id/"
+    "name": "Sourabh Jain",
+    "email": "sourabh.jain.107@gmail.com",
+    "url": ""
   },
   "build": {
-    "appId": "com.indomaxim.storaji",
-    "productName": "Storaji",
+    "appId": "com.jains.storaji",
+    "productName": "Inventory Management",
     "releaseInfo": {
       "releaseNotesFile": "src/electron/releaseNotes.md"
     },
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "IndomaximTechID",
-        "repo": "storaji"
-      }
-    ],
     "files": [
       "app/**"
     ],
@@ -56,11 +49,11 @@
     },
     "nsis": {
       "allowToChangeInstallationDirectory": true,
-      "shortcutName": "Storaji",
+      "shortcutName": "InventoryManager",
       "oneClick": false,
       "perMachine": true,
       "menuCategory": true,
-      "artifactName": "StorajiSetup.exe"
+      "artifactName": "InventoryManager.exe"
     }
   },
   "scripts": {

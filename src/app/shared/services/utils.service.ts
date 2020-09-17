@@ -104,8 +104,8 @@ export class UtilsService {
 
   setCurrency(currency: string): void {
     numeral.locales[currency].currency.symbol.length !== 3
-      ? localStorage.setItem('format', '$0,0')
-      : localStorage.setItem('format', '0,0 $');
+      ? localStorage.setItem('format', '$0,0.[00]')
+      : localStorage.setItem('format', '0,0.[00] $');
 
     numeral.locale(currency);
     localStorage.setItem('currency', currency);

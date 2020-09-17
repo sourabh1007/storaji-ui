@@ -35,8 +35,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       if (!numeral["locales"]["en-in"]) {
         numeral.register("locale", "en-in", {
            delimiters: {
-              thousands: " ",
-              decimal: ","
+              thousands: ",",
+              decimal: "."
            },
            abbreviations: {
               thousand: "K",
